@@ -3,10 +3,9 @@
 Este proyecto es un **sistema web básico** desarrollado en **PHP nativo** utilizando el **patrón MVC**, **PDO** para la conexión a base de datos y **Bootstrap + AdminLTE** para el diseño.  
 Incluye un **módulo de autenticación de usuarios** con login/logout, manejo de sesiones, permisos de acceso y un **panel de administración (Dashboard)**.
 
----
 
 ## 🚀 Características principales
-
+```python
 - 🔑 Inicio de sesión con validación de usuario/contraseña (MD5 en la BD).
 - 👥 Manejo de sesiones seguras con cierre de sesión (`logout`).
 - 🛡️ Permisos de acceso por roles (ejemplo: `super_admin`, otros roles).
@@ -14,75 +13,64 @@ Incluye un **módulo de autenticación de usuarios** con login/logout, manejo de
 - 🎨 Interfaz con **Bootstrap 3**, **Font Awesome** y **AdminLTE**.
 - 📊 Dashboard inicial con bienvenida al usuario y bloques de acción.
 - 📂 Menú lateral dinámico según permisos del usuario.
+```
+---
+####🚨 Importante para tener en cuenta no cambiar el formato
+```python
+- 👥 El index.php en la raíz es el router principal: construye los links, inicializa los controladores y las alertas, también inicializa sesión y conexión a BD.
 
+- 🗂️ En la carpeta core/View.php es el render: capturador único de vistas.
+
+- 📌 Las alertas se manejan construyendo los enlaces con el index.php -> ruteador alert= || $_GET[alert]
+
+- ✅ Ejemplo de link con alertas: header("Location: index.php?controller=Login&action=login&alert=2");
+```
+---
+## ⚙️ Requisitos
+```bash
+PHP >= 8.0.30
+MySQL
+Extensión PDO habilitada
+Servidor local como XAMPP
+Navegador moderno (Chrome, Firefox, Edge)
+```
 
 ---
 
-##🚨 Importante para tener en cuenta
-
-     👥 El index.php en la raíz es el router principal: construye los links, inicializa los controladores y las alertas, también inicializa sesión y conexión a BD.
-
-     🗂️ En la carpeta core/View.php es el render: capturador único de vistas.
-
-     📌 Las alertas se manejan construyendo los enlaces con el index.php -> ruteador alert= || $_GET[alert]
-
-     ✅ Ejemplo de link con alertas: header("Location: index.php?controller=Login&action=login&alert=2");
-
----
-
-⚙️ Requisitos
-    PHP >= 8.0.30
-
-    MySQL
-
-    Extensión PDO habilitada
-
-    Servidor local como XAMPP
-
-    Navegador moderno (Chrome, Firefox, Edge)
-
----
-
-🛠️ Instalación
-
+### 🛠️ Instalación
+```python
    Clonar o descargar el repositorio en tu servidor local:
-
-   bash
    https://github.com/chonazo/proyecto-finalLP3-PHP.git
-
-   2. **Configurar la base de datos** en `config/conexion.php`:
-
-   ```php
+```
+######    1. **Configurar la base de datos** en `config/conexion.php`:
+  ```python
+  php
    $server   = "localhost";
    $username = "root";
    $password = "1234";
    $database = "sysweb";
-   ```
+```
 
-   3. **Importar la base de datos**  
-      - Crea la base de datos `sysweb` en MySQL.
-      - Importa el archivo SQL (pendiente incluirlo en `/database/sysweb.sql`).
+######   2. **Importar la base de datos**  
+ ```python
+- Crea la base de datos `sysweb` en MySQL.
+- Importa el archivo SQL (pendiente incluirlo en `/database/sysweb.sql`).
 
-      Ejemplo en terminal:
+:fa-long-arrow-right: Ejemplo en terminal:
 
-      ```bash
-      mysql -u root -p sysweb < database/sysweb.sql
-      ```
+mysql -u root -p sysweb < database/sysweb.sql
+```
+  ######  3. **Iniciar el servidor local**:
+```python
+-  Si usas PHP directamente:
 
-   4. **Iniciar el servidor local**:
-      - Si usas PHP directamente:
-
-     ```bash
      php -S localhost:8000
-     ```
-    - O bien, iniciar Apache desde XAMPP.
 
-   5. **Acceder al sistema**:
+- O bien, iniciar Apache desde XAMPP.
+```
+   ######  5. **Acceder al sistema**:
 
-      ```
-      http://localhost/sysweb
-      ```
-
+	  http://localhost/sysweb
 ---
 
 👤 Usuarios de prueba
@@ -93,8 +81,62 @@ Asegúrate de tener un usuario activo en la tabla `usuarios`:
 |----------|----------------|-----------------|---------|
 | admin    | 21232f297a57a5a743894a0e4a801fc3 | super_admin | Activo |
 
-👉 **Nota:** `21232f297a57a5a743894a0e4a801fc3` corresponde a la contraseña **admin** en MD5.
-
+###### 👉 **Nota:** `21232f297a57a5a743894a0e4a801fc3` corresponde a la contraseña **admin** en MD5.
+---
+```python
+sysweb/
+├── config/                     # Configuraciones del sistema
+│   └── conexion.php            # Configuración de la conexión a la base de datos MySQL
+├── controllers/                # Controladores del patrón MVC
+│   ├── ChangeUserController.php # Controlador para cambio de contraseña
+│   ├── DashboardController.php  # Controlador para el panel de administración
+│   ├── LoginController.php      # Controlador para autenticación de usuarios
+│   ├── MainController.php       # Controlador principal para la lógica general
+│   └── [Otros controladores]    # Controladores para módulos como Usuarios, Departamentos, Productos, etc.
+├── core/                       # Núcleo del sistema
+│   └── View.php                # Clase para renderizado de vistas
+├── database/                   # Archivos relacionados con la base de datos
+│   └── sysweb.sql              # Script SQL para crear la base de datos (pendiente de incluir)
+├── models/                     # Modelos del patrón MVC
+│   ├── User.php                # Modelo para gestión de usuarios
+│   ├── Departamento.php        # Modelo para gestión de departamentos
+│   ├── Ciudad.php              # Modelo para gestión de ciudades
+│   ├── Producto.php            # Modelo para gestión de productos
+│   ├── Proveedor.php           # Modelo para gestión de proveedores
+│   ├── Cliente.php             # Modelo para gestión de clientes
+│   ├── Deposito.php            # Modelo para gestión de depósitos
+│   ├── UMedida.php             # Modelo para unidades de medida
+│   ├── TProducto.php           # Modelo para tipos de producto
+│   └── [Otros modelos]         # Modelos adicionales para otros módulos
+├── public/                     # Recursos públicos (CSS, JS, imágenes, etc.)
+│   ├── css/                    # Estilos personalizados
+│   ├── js/                     # Scripts JavaScript personalizados
+│   ├── img/                    # Imágenes utilizadas en el proyecto
+│   ├── bootstrap/              # Archivos de Bootstrap 3
+│   ├── fontawesome/            # Archivos de Font Awesome
+│   └── adminlte/               # Archivos de la plantilla AdminLTE
+├── views/                      # Vistas del patrón MVC
+│   ├── layouts/                # Plantillas base
+│   │   ├── main.php            # Plantilla principal del sistema
+│   │   ├── top_menu.php        # Menú superior
+│   │   └── sidebar_menu.php    # Menú lateral dinámico
+│   ├── dashboard/              # Vistas del panel de administración
+│   │   └── dashboard.php       # Vista principal del dashboard
+│   ├── usuarios/               # Vistas relacionadas con usuarios
+│   │   └── CambiarContrasena.php # Vista para cambio de contraseña
+│   ├── departamentos/          # Vistas para gestión de departamentos
+│   ├── ciudades/               # Vistas para gestión de ciudades
+│   ├── productos/              # Vistas para gestión de productos
+│   ├── proveedores/            # Vistas para gestión de proveedores
+│   ├── clientes/               # Vistas para gestión de clientes
+│   ├── depositos/              # Vistas para gestión de depósitos
+│   ├── umedidas/               # Vistas para unidades de medida
+│   ├── tproductos/             # Vistas para tipos de producto
+│   └── login/                  # Vistas para autenticación
+│       └── login.php           # Vista para el formulario de login
+├── index.php                   # Router principal y punto de entrada del sistema
+└── README.md                   # Documentación del proyecto
+```
 ---
 
 ## 📅 Cambios realizados en el proyecto
@@ -201,4 +243,3 @@ Asegúrate de tener un usuario activo en la tabla `usuarios`:
 
 Este proyecto se distribuye bajo la licencia **MIT**.  
 Eres libre de usarlo, modificarlo y adaptarlo para tus propios proyectos 🚀.
-
