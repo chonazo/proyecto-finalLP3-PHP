@@ -18,7 +18,8 @@ Incluye un **módulo de autenticación de usuarios** con login/logout, manejo de
 
 ---
 
-🚨 Importante para tener en cuenta
+##🚨 Importante para tener en cuenta
+
 👥 El index.php en la raíz es el router principal: construye los links, inicializa los controladores y las alertas, también inicializa sesión y conexión a BD.
 
 🗂️ En la carpeta core/View.php es el render: capturador único de vistas.
@@ -27,7 +28,9 @@ Incluye un **módulo de autenticación de usuarios** con login/logout, manejo de
 
 ✅ Ejemplo de link con alertas: header("Location: index.php?controller=Login&action=login&alert=2");
 
-⚙️ Requisitos
+---
+
+##⚙️ Requisitos
 PHP >= 8.0.30
 
 MySQL
@@ -38,12 +41,17 @@ Servidor local como XAMPP
 
 Navegador moderno (Chrome, Firefox, Edge)
 
-🛠️ Instalación
+---
+
+##🛠️ Instalación
+
 Clonar o descargar el repositorio en tu servidor local:
 
 bash
-git clone https://github.com/chonazo/ProyectoFinalLP3-PHP-JS-AdminLte-Bootstrap.git
+https://github.com/chonazo/proyecto-finalLP3-PHP.git
+
 2. **Configurar la base de datos** en `config/conexion.php`:
+
    ```php
    $server   = "localhost";
    $username = "root";
@@ -56,18 +64,21 @@ git clone https://github.com/chonazo/ProyectoFinalLP3-PHP-JS-AdminLte-Bootstrap.
    - Importa el archivo SQL (pendiente incluirlo en `/database/sysweb.sql`).
 
    Ejemplo en terminal:
+
    ```bash
    mysql -u root -p sysweb < database/sysweb.sql
    ```
 
 4. **Iniciar el servidor local**:
    - Si usas PHP directamente:
+
      ```bash
      php -S localhost:8000
      ```
    - O bien, iniciar Apache desde XAMPP.
 
 5. **Acceder al sistema**:
+
    ```
    http://localhost/sysweb
    ```
@@ -83,6 +94,8 @@ Asegúrate de tener un usuario activo en la tabla `usuarios`:
 | admin    | 21232f297a57a5a743894a0e4a801fc3 | super_admin | Activo |
 
 👉 **Nota:** `21232f297a57a5a743894a0e4a801fc3` corresponde a la contraseña **admin** en MD5.
+
+---
 
 ## 📅 Cambios realizados en el proyecto
 
