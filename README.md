@@ -20,37 +20,37 @@ Incluye un **módulo de autenticación de usuarios** con login/logout, manejo de
 
 ##🚨 Importante para tener en cuenta
 
-👥 El index.php en la raíz es el router principal: construye los links, inicializa los controladores y las alertas, también inicializa sesión y conexión a BD.
+     👥 El index.php en la raíz es el router principal: construye los links, inicializa los controladores y las alertas, también inicializa sesión y conexión a BD.
 
-🗂️ En la carpeta core/View.php es el render: capturador único de vistas.
+     🗂️ En la carpeta core/View.php es el render: capturador único de vistas.
 
-📌 Las alertas se manejan construyendo los enlaces con el index.php -> ruteador alert= || $_GET[alert]
+     📌 Las alertas se manejan construyendo los enlaces con el index.php -> ruteador alert= || $_GET[alert]
 
-✅ Ejemplo de link con alertas: header("Location: index.php?controller=Login&action=login&alert=2");
-
----
-
-##⚙️ Requisitos
-PHP >= 8.0.30
-
-MySQL
-
-Extensión PDO habilitada
-
-Servidor local como XAMPP
-
-Navegador moderno (Chrome, Firefox, Edge)
+     ✅ Ejemplo de link con alertas: header("Location: index.php?controller=Login&action=login&alert=2");
 
 ---
 
-##🛠️ Instalación
+⚙️ Requisitos
+    PHP >= 8.0.30
 
-Clonar o descargar el repositorio en tu servidor local:
+    MySQL
 
-bash
-https://github.com/chonazo/proyecto-finalLP3-PHP.git
+    Extensión PDO habilitada
 
-2. **Configurar la base de datos** en `config/conexion.php`:
+    Servidor local como XAMPP
+
+    Navegador moderno (Chrome, Firefox, Edge)
+
+---
+
+🛠️ Instalación
+
+   Clonar o descargar el repositorio en tu servidor local:
+
+   bash
+   https://github.com/chonazo/proyecto-finalLP3-PHP.git
+
+   2. **Configurar la base de datos** en `config/conexion.php`:
 
    ```php
    $server   = "localhost";
@@ -59,33 +59,33 @@ https://github.com/chonazo/proyecto-finalLP3-PHP.git
    $database = "sysweb";
    ```
 
-3. **Importar la base de datos**  
-   - Crea la base de datos `sysweb` en MySQL.
-   - Importa el archivo SQL (pendiente incluirlo en `/database/sysweb.sql`).
+   3. **Importar la base de datos**  
+      - Crea la base de datos `sysweb` en MySQL.
+      - Importa el archivo SQL (pendiente incluirlo en `/database/sysweb.sql`).
 
-   Ejemplo en terminal:
+      Ejemplo en terminal:
 
-   ```bash
-   mysql -u root -p sysweb < database/sysweb.sql
-   ```
+      ```bash
+      mysql -u root -p sysweb < database/sysweb.sql
+      ```
 
-4. **Iniciar el servidor local**:
-   - Si usas PHP directamente:
+   4. **Iniciar el servidor local**:
+      - Si usas PHP directamente:
 
      ```bash
      php -S localhost:8000
      ```
-   - O bien, iniciar Apache desde XAMPP.
+    - O bien, iniciar Apache desde XAMPP.
 
-5. **Acceder al sistema**:
+   5. **Acceder al sistema**:
 
-   ```
-   http://localhost/sysweb
-   ```
+      ```
+      http://localhost/sysweb
+      ```
 
 ---
 
-## 👤 Usuarios de prueba
+👤 Usuarios de prueba
 
 Asegúrate de tener un usuario activo en la tabla `usuarios`:
 
@@ -177,6 +177,7 @@ Asegúrate de tener un usuario activo en la tabla `usuarios`:
   - Validación de Contraseñas cambiada (longitud, coincidencia) usando md5().
 
 🗓️ 05/10/2025
+### 9. Se agrego funciones de CRUD nuevos para compras.
 - Se implementaron funciones CRUD completas y reportes de los siguientes módulos:
   - Depósitos
   - Unidades de Medida (UMedidas)
