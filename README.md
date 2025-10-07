@@ -228,6 +228,14 @@ sysweb/
   - Proveedores
   - Clientes
 
+🗓️ 07/10/2025
+### 10. Se agrego funciones de compras.
+- Se implementaron funciones CRUD completas y reportes de compras:
+  - Se implemento vista compra
+  - Se implemento formulario compra
+  - Se implemento modal para guardad
+  - Se implemento vista stock e informe 
+
 ---
 
 ## 📖 Créditos

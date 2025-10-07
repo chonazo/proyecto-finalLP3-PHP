@@ -4,11 +4,10 @@ require_once __DIR__ . '/../model/ReportModel.php';
 
 use Spipu\Html2Pdf\Html2Pdf;
 
-class ReportController
-{
+class ReportController {
     private $reportModel;
 
-    public function __construct($conn) { 
+    public function __construct($conn) {
         $this->reportModel = new ReportModel($conn);
     }
 
@@ -99,6 +98,57 @@ class ReportController
         $this->generarPDF($view, $data, $filename);
     }
 
+    // --- Reporte stock ---
+    public function reporteStock() {
+        $sql = "SELECT p.p_descrip, p.precio, d.descrip, s.cantidad
+        FROM stock s
+        INNER JOIN producto p ON s.cod_producto = p.cod_producto
+        INNER JOIN deposito d ON s.cod_deposito = d.cod_deposito";
+        $data = $this->reportModel->getData($sql);
+        $view = __DIR__ . '/../report/stock.php';
+        $filename = 'reporte_stock.pdf';
+
+        $this->generarPDF($view, $data, $filename);
+    }
+
+    // --- Reporte Compra ---
+    public function reporteCompraIndividual() {
+        if (isset($_GET['id'])) {
+            $cod_compra = $_GET['id'];
+
+            // Consulta de cabecera
+            $sqlCabecera = "SELECT comp.cod_compra, prov.cod_proveedor, prov.razon_social,
+                        dep.cod_deposito, dep.descrip AS deposito, comp.nro_factura,
+                        comp.fecha, comp.hora, comp.total_compra, usu.id_user, usu.name_user
+                        FROM compra comp 
+                        INNER JOIN proveedor prov ON comp.cod_proveedor = prov.cod_proveedor
+                        INNER JOIN deposito dep ON comp.cod_deposito = dep.cod_deposito
+                        INNER JOIN usuarios usu ON comp.id_user = usu.id_user
+                        WHERE comp.cod_compra = :cod_compra";
+
+            // Consulta de detalle
+            $sqlDetalle = "SELECT pro.cod_producto, pro.p_descrip, tpro.t_p_descrip,
+                       um.u_descrip, det.precio, det.cantidad
+                       FROM detalle_compra det
+                       INNER JOIN producto pro ON det.cod_producto = pro.cod_producto
+                       INNER JOIN tipo_producto tpro ON pro.cod_tipo_prod = tpro.cod_tipo_prod
+                       INNER JOIN u_medida um ON pro.id_u_medida = um.id_u_medida
+                       WHERE det.cod_compra = :cod_compra";
+
+            // Obtener datos
+            $cabecera = $this->reportModel->getData($sqlCabecera, [':cod_compra' => $cod_compra]);
+            $detalle = $this->reportModel->getData($sqlDetalle, [':cod_compra' => $cod_compra]);
+
+            // Enviar a la vista
+            $data = ['cabecera' => $cabecera[0], 'detalle' => $detalle];
+            $view = __DIR__ . '/../report/compraIndividual.php';
+            $filename = 'reporte_compra_' . $cod_compra . '.pdf';
+
+            $this->generarPDF($view, $data, $filename);
+        }
+    }
+
+
     // --- Método común que renderiza el PDF ---
     private function generarPDF($view, $data, $filename) {
         ob_start();
@@ -113,7 +163,4 @@ class ReportController
             echo $e->getMessage();
         }
     }
-
-
 }
-

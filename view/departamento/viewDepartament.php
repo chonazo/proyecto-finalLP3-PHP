@@ -22,7 +22,7 @@
                     1 => ['type' => 'success', 'text' => 'Los datos se han registrado correctamente.'],
                     2 => ['type' => 'success', 'text' => 'Los datos se han modificados correctamente.'],
                     3 => ['type' => 'success', 'text' => 'Los datos se han eliminado correctamente.'],
-                    4 => ['type' => 'danger', 'text' => 'No se pudo realizar la operación.'],
+                    4 => ['type' => 'danger', 'text' => 'No se pudo realizar la operación.']
 
                 ];
 

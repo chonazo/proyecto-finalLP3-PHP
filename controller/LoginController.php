@@ -4,8 +4,7 @@ require_once __DIR__ . '/../model/UserModel.php';
 require_once __DIR__ . '/../lib/EmailHelper.php';
 require_once __DIR__ . '/../core/view.php';
 
-class LoginController
-{
+class LoginController {
     private $userModel;
 
     public function __construct(PDO $conn) {
